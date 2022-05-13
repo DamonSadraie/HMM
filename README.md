@@ -14,7 +14,7 @@ Transmission and Emission matrices with appropriate sizes are created. user inpu
  
  ** Since in some problems termination event matters, Termination matrix is also included in the generated Transmission Matrix.
  
- ** if user wishes define the parameters of the problem without termination event probabilities, he/she would simply 
+ ** if user wishes to define the parameters of the problem without termination event probabilities, he/she would simply 
     input 1 in (event => end) boxes inside the Transmission matrix.
     
  ** ofc, (start => end) boxes inside the Transmission matrix should always be 0.
