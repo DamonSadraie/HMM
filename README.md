@@ -4,7 +4,7 @@ Script for solving Scoring, Decoding and Learning HMM problems with GUI for inpu
 Run GUI1
 # Main Code
 mainCode.py contains the algoithms for solving Scoring-solo, Scoring-paired, and Decoding problems.
-The module for saving and retrieving variables is also included here .
+The module for saving and retrieving variables across scripts is also included here .
 # GUI 1
 user defines the observations and events.
 # GUI 2
