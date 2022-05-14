@@ -1,7 +1,7 @@
 # HMM
 Script for solving Scoring, Decoding and Learning HMM problems with GUI for input and output
 # How to start
-Run GUI1
+Run GUI1.py or the stand-alone HMM.exe file.
 # Main Code
 mainCode.py contains the algoithms for solving Scoring-solo, Scoring-paired, and Decoding problems.
 The module for saving and retrieving variables across scripts is also included here .
