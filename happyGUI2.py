@@ -1,6 +1,7 @@
 ######################################### Tkinter Root + Retrieving The Stored Vars
 import tkinter as tk
 import mainCode as mC
+import random as ranD
 root = tk.Tk()
 root.geometry("520x400")
 observations=mC.observations
@@ -82,7 +83,7 @@ def but1ok():
             totalY=0
             for y in Yrange:
                 totalY+=float(transmissionMatrix[x][y])
-            if not (totalY==1 or totalY==2):
+            if not (round(totalY,6)==1 or round(totalY,6)==2):
                 but1.config(fg="red")
                 del transmissionMatrix
                 return
@@ -112,7 +113,7 @@ def but2ok():
             totalY=0
             for y in Yrange:
                 totalY+=float(emissionMatrix[x][y])
-            if not (totalY==1):
+            if not (round(totalY,6)==1):
                 but1.config(fg="red")
                 del emissionMatrix
                 return        
@@ -131,10 +132,54 @@ def but3ok():
     root.destroy()
     import happyGUI3
     return
+def but4ok():
+    transmissionMatrix = [[0 for y in wierdRange] for x in wierdRange]
+    emissionMatrix = [[0 for y in cringeRange] for x in creapyRange]
+    exec((wierdSX[0]+wierdSY[-1]) + ".delete(0,'end')")
+    exec((wierdSX[0]+wierdSY[-1]) + ".insert(0, '0')")
+    for x in wierdRange:
+        if x==0:
+            subTotal=1
+            for y in range(len(wierdStates)-1):
+                number=round(ranD.uniform(0, subTotal),2)
+                exec((wierdSX[x]+wierdSY[y]) + ".delete(0,'end')")
+                exec((wierdSX[x]+wierdSY[y]) + ".insert(0, str(number))")
+                transmissionMatrix[x][y]=number
+                subTotal-=number
+            exec((wierdSX[x]+wierdSY[-2]) + ".delete(0,'end')")
+            exec((wierdSX[x]+wierdSY[-2]) + ".insert(0, str(round(subTotal,2)))")            
+            transmissionMatrix[x][-2]=round(subTotal,2)
+        else:
+            subTotal=1
+            for y in range(len(wierdStates)):
+                number=round(ranD.uniform(0, subTotal),2)
+                exec((wierdSX[x]+wierdSY[y]) + ".delete(0,'end')")
+                exec((wierdSX[x]+wierdSY[y]) + ".insert(0, str(number))")                 
+                transmissionMatrix[x][y]=number
+                subTotal-=number
+            exec((wierdSX[x]+wierdSY[-1]) + ".delete(0,'end')")
+            exec((wierdSX[x]+wierdSY[-1]) + ".insert(0, str(round(subTotal,2)))")
+            transmissionMatrix[x][-1]=round(subTotal,2)
+    for x in creapyRange:
+        subTotal=1
+        for y in range(len(wierdObservations)-1):
+            number=round(ranD.uniform(0, subTotal),2)
+            exec((wierdStates[x]+wierdObservations[y]) + ".delete(0,'end')")
+            exec((wierdStates[x]+wierdObservations[y]) + ".insert(0, str(number))")
+            emissionMatrix[x][y]=number
+            subTotal-=number
+        exec((wierdStates[x]+wierdObservations[-1]) + ".delete(0,'end')")
+        exec((wierdStates[x]+wierdObservations[-1]) + ".insert(0, str(round(subTotal,2)))")
+        emissionMatrix[x][-1]=round(subTotal,2)        
+    mC.saveTMatrix(transmissionMatrix)
+    mC.saveEMatrix(emissionMatrix)
+    return
 but1=tk.Button(root,text="click!",padx=15,pady=5,command=but1ok,fg="black",bg="grey")
 but1.grid(row=len(wierdStates)+2,column=len(wierdStates)+2)
 but2=tk.Button(root,text="click!",padx=15,pady=5,command=but2ok,fg="black",bg="grey")
 but2.grid(row=len(wierdStates*2)+4,column=len(wierdObservations)+1)
 but3=tk.Button(root,text="Go to Menu",padx=15,pady=5,command=but3ok,fg="red",bg="grey",state="disabled")
 but3.grid(row=len(wierdStates*2)+4,column=len(wierdObservations)+2,columnspan=10)
+but4=tk.Button(root,text="Random Seed",padx=15,pady=5,command=but4ok,fg="black",bg="grey",state="normal")
+but4.grid(row=len(wierdStates*2)+5,column=len(wierdObservations)+2,columnspan=9)
 root.mainloop()
